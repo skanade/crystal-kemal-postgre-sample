@@ -1,0 +1,21 @@
+name: crystal-kemal-postgre-sample
+version: 0.1.0
+
+authors:
+  - Shunichi Kanade <kanade.shunichi@gmail.com>
+
+targets:
+  crystal-kemal-postgre-sample:
+    main: src/crystal-kemal-postgre-sample.cr
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+  pg:
+    github: will/crystal-pg
+  totem:
+    github: icyleaf/totem
+
+crystal: 0.32.1
+
+license: MIT
