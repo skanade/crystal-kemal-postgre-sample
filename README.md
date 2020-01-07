@@ -4,15 +4,17 @@ Sample code in Crystal using Kemal web framework connected to PostgreSQL
 
 ## Installation
 
-1. Create a PostgreSQL database with the following table and populate it with some data.
+Create a PostgreSQL database with the following table and populate it with some data.
 
+```sql
 CREATE TABLE people (
   id serial PRIMARY KEY,
   first VARCHAR(20) NOT NULL,
   last VARCHAR(20) NOT NULL
 );
+```
 
-2. Modify the PostgreSQL DB configuration in main.yml 
+Modify the PostgreSQL DB configuration in main.yml 
 
 ## Usage
 
