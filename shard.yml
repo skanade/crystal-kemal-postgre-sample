@@ -15,6 +15,9 @@ dependencies:
     github: will/crystal-pg
   totem:
     github: icyleaf/totem
+  di:
+    github: funk-yourself/crystal-di
+    version: ~> 0.2.1
 
 crystal: 0.32.1
 
