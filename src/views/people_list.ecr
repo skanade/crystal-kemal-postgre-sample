@@ -1,12 +1,12 @@
-<div>
-<%- people.each do |person| -%>
-<%= person.to_s%><br/>
-<%- end -%>
-</div>
-
 <div class='create-new'>
-  <form action='/people/new' method='post'>
+  <form action='/people/create' method='post'>
     <input class='main-button' type='submit' value='Create New'/>
   </form>
 </div>
 
+<div>
+<%- people.each do |person| -%>
+<span><a href="/people/update/<%=person.id%>"><%= person.to_s%></a> <a href="/people/delete/<%=person.id%>" class="button">Delete</a></span>
+<br/>
+<%- end -%>
+</div>
