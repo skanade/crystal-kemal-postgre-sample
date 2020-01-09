@@ -26,7 +26,7 @@ crystal src/crystal-kemal-postgre-sample.cr
 
 (This is just some sample code, but leaving the original instructions below)
 
-1. Fork it (<https://github.com/your-github-user/my-postgresql/fork>)
+1. Fork it (<https://github.com/your-github-user/crystal-kemal-postgre-sample/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
