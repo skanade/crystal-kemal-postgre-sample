@@ -72,7 +72,7 @@ module PersonMapper
 
     DB.open dbconfig.postgres_uri do |db|
       result = db.exec delete_sql, id
-      puts result
+      puts "delete_by_id rows_affected: #{result.rows_affected}"
     end
   end
 
@@ -87,6 +87,28 @@ module PersonMapper
       person = Person.new(id, first, last)
       return person
     end
+  end
+
+  def self.find_names_like(text)
+    dbconfig = DBConfig.init
+
+    people = Array(Person).new
+
+    like_text = "#{text}%"
+
+    # postgresql: use $1 & $2
+    find_sql = "select id, first, last from people where first like $1 or last like $2"
+
+    DB.open dbconfig.postgres_uri do |db|
+      db.query find_sql, like_text, like_text do |rs|
+        rs.each do 
+          person = load(rs)
+          people << person
+        end
+      end
+    end
+
+    people
   end
 
 end

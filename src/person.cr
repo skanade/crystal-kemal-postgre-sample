@@ -1,3 +1,5 @@
+require "json"
+
 class Person
   getter id : Int32
   setter id
@@ -17,5 +19,11 @@ class Person
   def to_s
     "#{id} #{first} #{last}"
   end
+
+  JSON.mapping(
+    id: Int32,
+    first: String,
+    last: String
+  )
   
 end

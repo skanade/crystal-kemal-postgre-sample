@@ -1,7 +1,54 @@
 <html>
 <head>
+  <meta charset="utf-8"/>
   <title>My Application</title>
-    <style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+
+  $(document).ready(function() {
+
+    $("#search-button").click(function(){
+      var searchText = $("#search-text").val();
+      var searchJson = {
+        text: searchText
+      }
+
+      $.ajax({
+          url: "/people/search",
+          type: "POST",
+          dataType: 'json',
+          contentType: "application/json",
+          data: JSON.stringify(searchJson)
+      })
+      .done(function(data, textStatus, jqXHR) {
+        console.log("ajax.done data: "+data);
+        console.log("textStatus: "+textStatus);
+        console.log("jqXHR.status: "+jqXHR.status);
+        console.log("jqXHR.responseText: "+jqXHR.responseText);
+
+        $("#search-results").html(JSON.stringify(data));
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        console.log("ajax.fail");
+        console.log("textStatus: "+textStatus);
+        console.log("errorThrown: "+errorThrown);
+        console.log("jqXHR.status: "+jqXHR.status);
+        console.log("jqXHR.responseText: "+jqXHR.responseText);
+      })
+      .always(function(data, textStatus, jqXHR) {
+        console.log("ajax.always data: "+data);
+        console.log("textStatus: "+textStatus);
+        console.log("jqXHR.status: "+jqXHR.status);
+        console.log("jqXHR.responseText: "+jqXHR.responseText);
+      });
+      return false;
+    });
+
+
+  });
+  </script>
+
+  <style>
       .button {
         border-radius: 8px;
         background-color: #DC676C;
@@ -15,7 +62,7 @@
         margin: 2px 2px;
         cursor: pointer;
       }
-    </style>
+  </style>
 </head>
 <body>
   <%= content %>

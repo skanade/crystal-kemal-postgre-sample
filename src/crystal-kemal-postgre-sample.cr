@@ -16,6 +16,10 @@ end
 module Crystal::Kemal::Postgre::Sample
   VERSION = "0.1.0"
 
+  get "/" do
+    render "src/views/index.ecr", "src/views/layouts/layout.ecr"
+  end
+
   get "/people/sample" do
     people = sample()
     render "src/views/people_list.ecr", "src/views/layouts/layout.ecr"
@@ -24,6 +28,31 @@ module Crystal::Kemal::Postgre::Sample
   get "/people" do
     people = PersonMapper.find_all()
     render "src/views/people_list.ecr", "src/views/layouts/layout.ecr"
+  end
+
+  get "/people/search" do
+    render "src/views/people_search.ecr", "src/views/layouts/layout.ecr"
+  end
+
+  before_post "/people/search" do |env|
+    env.response.content_type = "application/json"
+  end
+
+  post "/people/search" do |env|
+    #puts "===== env.params ===="
+    #puts env.params.pretty_inspect
+
+    text = env.params.json["text"].as(String)
+    puts "post /people/search for text: #{text}"
+
+    puts "post /people/search env.response.headers['Content-Type']: #{env.response.headers["Content-Type"]}"
+
+    people = PersonMapper.find_names_like(text)
+
+    #puts typeof(env.response)
+    #{"name": "Foo"}.to_json
+
+    people.to_json
   end
 
   get "/people/delete/:id" do |env|
@@ -66,12 +95,6 @@ module Crystal::Kemal::Postgre::Sample
 
     render "src/views/people_update.ecr", "src/views/layouts/layout.ecr"
   end
-
-
-#  get "/people/:id" do |env|
-#    id = env.params.url["id"]
-#    render "src/views/hello.ecr", "src/views/layouts/layout.ecr"
-#  end
 
 end
 
